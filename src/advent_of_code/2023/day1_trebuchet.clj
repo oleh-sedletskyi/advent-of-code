@@ -18,9 +18,8 @@
 
 (defn get-number [line]
   (let [numbers (re-seq #"\d" line)
-        nums (str (first numbers) (last numbers))
-        num (parse-long nums)]
-    num))
+        nums (str (first numbers) (last numbers))]
+    (parse-long nums)))
 
 ;; Part 1 Example input
 (->> ["1abc2one"
@@ -28,7 +27,7 @@
       "a1b2c3d4e5f"
       "treb7uchet"]
      (map get-number)
-     (reduce +))
+     (apply +))
 ;; 142
 
 ;; Part 1 Test input
@@ -36,7 +35,7 @@
      (slurp)
      (str/split-lines)
      (map get-number)
-     (reduce +))
+     (apply +))
 
 ;; 54159
 
@@ -55,7 +54,7 @@
    "nine" 9,
    "four" 4})
 
-(defn parse-num [num]
+(defn word-to-num [num]
   (get words-to-digits num num))
 
 (defn get-key [line f1 f2]
@@ -77,10 +76,9 @@
 
 (defn get-string-number [line]
   (let [nums (->> [(get-first-number line) (get-last-number line)]
-                  (map parse-num)
-                  (str/join))
-        num (parse-long nums)]
-    num))
+                  (map word-to-num)
+                  (str/join))]
+    (parse-long nums)))
 
 ;; Part 2 Example input
 (->> ["two1nine"
@@ -91,7 +89,7 @@
       "zoneight234"
       "7pqrstsixteen"]
      (map get-string-number)
-     (reduce +))
+     (apply +))
 
 ;; 281
 
@@ -101,6 +99,6 @@
      (str/split-lines)
      (map str/lower-case)
      (map get-string-number)
-     (reduce +))
+     (apply +))
 
 ;; 53866
