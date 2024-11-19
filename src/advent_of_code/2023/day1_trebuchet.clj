@@ -31,7 +31,7 @@
 ;; 142
 
 ;; Part 1 Test input
-(->> (io/resource "day1.txt")
+(->> (io/resource "2023-day1.txt")
      (slurp)
      (str/split-lines)
      (map get-number)
@@ -94,7 +94,7 @@
 ;; 281
 
 ;; Part 2 test input
-(->> (io/resource "day1.txt")
+(->> (io/resource "2023-day1.txt")
      (slurp)
      (str/split-lines)
      (map str/lower-case)
