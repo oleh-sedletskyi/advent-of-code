@@ -21,7 +21,7 @@
 ;; The third time a hash starts with five zeroes is for abc5278568, discovering the character f.
 ;; In this example, after continuing this search a total of eight times, the password is 18f47a30.
 
-(defn md5 [s]
+(defn md5 [^String s]
   ;; https://gist.github.com/jizhang/4325757
   (let [algorithm (MessageDigest/getInstance "MD5")
         raw (.digest algorithm (.getBytes s))]
