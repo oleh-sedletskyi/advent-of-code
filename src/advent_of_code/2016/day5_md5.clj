@@ -23,9 +23,16 @@
 
 (defn md5 [^String s]
   ;; https://gist.github.com/jizhang/4325757
+  ;; 66 secs for part2
   (let [algorithm (MessageDigest/getInstance "MD5")
         raw (.digest algorithm (.getBytes s))]
     (format "%032x" (BigInteger. 1 raw))))
+
+(def ^MessageDigest algorithm (MessageDigest/getInstance "MD5"))
+
+(defn md5 [^String s]
+  ;; without creating instance each time 63 sec (part 2)
+  (format "%032x" (BigInteger. 1 (.digest algorithm (.getBytes s)))))
 
 (md5 "abc3231929")
 (md5 "abc5017308")
