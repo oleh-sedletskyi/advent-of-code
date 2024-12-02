@@ -32,29 +32,19 @@
 ;; calc distances
 ;; sum up
 
-(def input
-  "3   4
-   4   3
-   2   5
-   1   3
-   3   9
-   3   3")
+(defn transpose [data]
+  (apply map vector data))
 
 (def test-input
   (->> (io/resource "2024/day1.txt")
        (slurp)
-       #_input
        (str/split-lines)
-       (map #(->> (re-matches #"\s*(\d+)\s+(\d+)\s*" %)
-                  (take-last 2)))))
-
-(let [sorted-lists (->> [first second]
-                        (map (fn [f]
-                               (->> test-input
-                                    (map #(f %))
-                                    (map parse-long))))
-                        (map sort))]
-  (->> (map #(vector %1 %2) (first sorted-lists) (second sorted-lists))
+       (map #(str/split % #" +"))
+       (map (fn [pair]
+              (map parse-long pair)))
+       transpose
+       (map sort)
+       transpose
        (map #(apply - %))
        (map abs)
        (apply +)))
